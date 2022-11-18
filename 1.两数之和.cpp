@@ -3,6 +3,11 @@
  *
  * [1] 两数之和
  */
+#include <algorithm>
+#include <vector>
+#include <iostream>
+#include <unordered_map>
+using namespace std;
 
 // @lc code=start
 class Solution
@@ -10,16 +15,15 @@ class Solution
 public:
     vector<int> twoSum(vector<int> &nums, int target)
     {
-        int n = nums.size();
-        for (int i = 0; i < n; ++i)
+        unordered_map<int, int> hashmap;
+        for (int i = 0; i < nums.size(); i++)
         {
-            for (int j = i + 1; j < n; ++j)
+            auto item = hashmap.find(target - nums[i]);
+            if (item != hashmap.end())
             {
-                if (nums[i] + nums[j] == target)
-                {
-                    return {i, j};
-                }
+                return {item->second, i};
             }
+            hashmap[nums[i]] = i;
         }
         return {};
     }
