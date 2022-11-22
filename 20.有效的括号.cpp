@@ -25,20 +25,32 @@ public:
         stack<char> stk;
         for (int i = 0; i < stringLength; i++)
         {
-            if (s[i] == '(')
+            // if (s[i] == '(')
+            // {
+            //     stk.push(s[i]);
+            // }
+            // else
+            // {
+            //     if (!stk.empty() && stk.top() != bracketMap[s[i]])
+            //     {
+            //         return false;
+            //     }
+            //     stk.pop();
+            // }
+            if (bracketMap.count(s[i]))
+            // if (s[i] == ')' || ']' || '}')
             {
-                stk.push(s[i]);
-            }
-            else
-            {
-                if (bracketMap[s[i]] != stk.top())
+                if (stk.empty() || stk.top() != bracketMap[s[i]])
                 {
                     return false;
                 }
                 stk.pop();
             }
+            else
+            {
+                stk.push(s[i]);
+            }
         }
-        printf("%c", stk.top());
         return stk.empty();
     }
 };
