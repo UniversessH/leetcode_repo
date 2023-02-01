@@ -13,36 +13,54 @@ class Solution
 public:
     vector<int> sortedSquares(vector<int> &nums)
     {
-        vector<int> res;
+        // vector<int> res;
+        // int length = nums.size();
+        // int zeroIndex = -1;
+        // for (int i = 0; i < length; i++)
+        // {
+        //     if (nums[i] < 0)
+        //         zeroIndex = i;
+        // }
+        // int negativePointer = zeroIndex, positiveIndex = zeroIndex + 1;
+        // while (negativePointer >= 0 || positiveIndex < length)
+        // {
+        //     if (negativePointer < 0)
+        //     {
+        //         res.push_back(nums[positiveIndex] * nums[positiveIndex]);
+        //         positiveIndex++;
+        //     }
+        //     else if (positiveIndex > length - 1)
+        //     {
+        //         res.push_back(nums[negativePointer] * nums[negativePointer]);
+        //         negativePointer--;
+        //     }
+        //     else if (nums[negativePointer] * nums[negativePointer] < nums[positiveIndex] * nums[positiveIndex])
+        //     {
+        //         res.push_back(nums[negativePointer] * nums[negativePointer]);
+        //         negativePointer--;
+        //     }
+        //     else
+        //     {
+        //         res.push_back(nums[positiveIndex] * nums[positiveIndex]);
+        //         positiveIndex++;
+        //     }
+        // }
+        // return res;
         int length = nums.size();
-        int zeroIndex = -1;
-        for (int i = 0; i < length; i++)
+        vector<int> res(length,0);
+        int left = 0, right = length - 1;
+        int i = length - 1;
+        while (left <= right)
         {
-            if (nums[i] < 0)
-                zeroIndex = i;
-        }
-        int negativePointer = zeroIndex, positiveIndex = zeroIndex + 1;
-        while (negativePointer >= 0 || positiveIndex < length)
-        {
-            if (negativePointer < 0)
+            if (nums[left] * nums[left] > nums[right] * nums[right])
             {
-                res.push_back(nums[positiveIndex] * nums[positiveIndex]);
-                positiveIndex++;
-            }
-            else if (positiveIndex > length - 1)
-            {
-                res.push_back(nums[negativePointer] * nums[negativePointer]);
-                negativePointer--;
-            }
-            else if (nums[negativePointer] * nums[negativePointer] < nums[positiveIndex] * nums[positiveIndex])
-            {
-                res.push_back(nums[negativePointer] * nums[negativePointer]);
-                negativePointer--;
+                res[i--] = nums[left] * nums[left];
+                left++;
             }
             else
             {
-                res.push_back(nums[positiveIndex] * nums[positiveIndex]);
-                positiveIndex++;
+                res[i--] = nums[right] * nums[right];
+                right--;
             }
         }
         return res;
